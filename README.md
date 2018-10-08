@@ -1,1 +1,0 @@
-Presentation is about performance in React
