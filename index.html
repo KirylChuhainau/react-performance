@@ -1,147 +1,725 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <title>Shower Presentation Engine</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="node_modules/shower-ribbon/styles/styles.css">
-    <style>
-        .shower {
-            --slide-ratio: calc(16 / 9);
-        }
-    </style>
+  <title>React performance</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="node_modules/shower-ribbon/styles/styles.css">
+  <style>
+    .shower {
+      --slide-ratio: calc(16 / 9);
+    }
+  </style>
 </head>
+
 <body class="shower list">
 
-    <header class="caption">
-        <h1>React performance </h1>
-        <p>Кирилл Чугаинов, Teckartgroup LLC</p>
-    </header>
+  <header class="caption">
+    <h1>React/redux performance </h1>
+    <p>Кирилл Чугаинов, Teckartgroup LLC</p>
+  </header>
 
-    <section class="slide" id="cover">
-        <h2>React performance</h2>
-        <p>Кирилл Чугаинов</p>
-        <figure>
-            <img class="cover" src="pictures/cover.jpg" alt="Hands on the orange typewriter in a park">
-        </figure>
-        <style>
-            #cover h2 {
-                color: white;
-                font-size: 70px;
-            }
+  <section class="slide" id="cover">
+    <h2 class="shout">React/redux performance</h2>
+    <style>
+      #cover {
+        background-color: black;
+      }
 
-            #cover p {
-                margin: 10px 0 0;
-                color: white;
-                font-style: italic;
-                font-size: 20px;
-            }
+      #cover h2 {
+        color: white;
+        font-size: 100px;
+      }
+    </style>
+  </section>
 
-            #cover p a {
-                color: white;
-            }
-        </style>
-    </section>
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/addMemes.jpg" alt="how to drow an owl">
+    </figure>
+  </section>
 
-    <section class="slide">
-        <h2 class="shout" style="font-size: 100px">Virtual DOM</h2>
-    </section>
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/owl.jpg" alt="how to drow an owl">
+    </figure>
+  </section>
 
-    <section class="slide">
-        <figure>
-            <img class="cover" src="pictures/virtual-dom-update.png" alt="How virtual DOM works">
-            <figcaption class="copyright right white">
-                <a href="https://www.naukri.com/">© Naukri Engineering</a>
-            </figcaption>
-        </figure>
-        <style>
-          .copyright a {
-            color: black; 
-          }
-        </style>
-    </section>
+  <section class="slide" id="cover-react">
+    <h2>React</h2>
+    <figure>
+      <img class="cover" src="pictures/React-icon.png" alt="React icon">
+    </figure>
+    <style>
+      #cover-react {
+        background-color: black;
+      }
 
-    <section class="slide">
-        <h2 class="shout" style="font-size: 100px">render()</h2>
-    </section>
+      #cover-react h2 {
+        color: white;
+        font-size: 70px;
+      }
 
-    <section class="slide">
-        <h2 class="shout" style="font-size: 100px">shouldComponentUpdate()</h2>
-    </section>
+      #cover-react p {
+        margin: 10px 0 0;
+        color: white;
+        font-style: italic;
+        font-size: 20px;
+      }
 
-    <section class="slide">
-        <figure>
-            <img class="cover" src="pictures/rerender.png" alt="How react do rerender">
-        </figure>
-    </section>
+      #cover-react p a {
+        color: white;
+      }
+    </style>
+  </section>
 
-    <section class="slide">
-        <h2 class="shout" style="font-size: 100px">shouldComponentUpdate ?</h2>
-    </section>
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Это библиотека</h2>
+  </section>
 
-    <section class="slide">
-      <h2 class="shout">Yes!</h2>
-    </section>
+  <section class="slide">
+    <h2>Концепции:</h2>
+    <p><strong>Элементы</strong> — это объекты JavaScript, которые представляют HTML-элементы. Их не существуют в браузере. они описывают DOM-элементы, такие как h1, div, или section.</p>
+  </section>
 
-    <section class="slide">
-      <h2>По умолчанию React делает так:</h2>
-      <pre>
-        <code>shouldComponentUpdate(nextProps, nextState) {</code>
-        <code>  return <mark>true</mark>;</code>
-        <code>}</code>
-      </pre>
-    </section>
+  <section class="slide">
+    <h2>Концепции:</h2>
+    <p><strong>Компоненты</strong> — это элементы React, написанные разработчиком. Обычно это части пользовательского интерфейса, которые содержат свою структуру и функциональность. Например, такие как NavBar, LikeButton, или ImageUploader. </p>
+  </section>
 
-    <section class="slide">
-        <h2 class="shout" style="font-size: 100px">Переопределить SCU</h2>
-    </section>
+  <section class="slide">
+    <h2>Концепции:</h2>
+    <p><strong>JSX</strong> — это техника создания элементов и компонентов React. Например, это React-элемент, написанный на JSX: </p>
+    <pre>
+      <code>&lt;h1&gt;Hello&lt;/h1&gt;</code>
+      <code>...</code>
+      <code>React.DOM.h1(null, 'Hello');</code>
+    </pre>
+  </section>
 
-    <section class="slide">
-      <pre>
-        <code>shouldComponentUpdate(nextProps, nextState){</code>
-        <code>  if (this.props.prop1 !== nextProps.prop1) {</code>
-        <code>    return <mark>true</mark>;</code>
-        <code>  }</code>
-        <code>  if (this.state.state1 !== nextState.state1) {</code>
-        <code>    return <mark>true</mark>;</code>
-        <code>  }</code>
-        <code>  return <mark>false</mark>;</code>
-        <code>}</code>
-      </pre>
-    </section>
+  <section class="slide">
+    <h2>Концепции:</h2>
+    <p><strong>Virtual DOM </strong> — это дерево React элементов на JavaScript. React отрисовывает Virtual DOM в браузере, чтоб сделать интерфейс видимым. React следит за изменениями в Virtual DOM и автоматически изменяет DOM в браузере так, чтоб он соответствовал виртуальному. </p>
+  </section>
+  
+  <section class="slide">
+    <h2>Концепции:</h2>
+    <p><strong>State </strong> —  это специальный объект внутри компонента. Он хранит данные, которые могут изменятся с течением времени. </p>
+  </section>
 
-    <section class="slide">
-      <h2 class="shout" style="font-size: 100px">PureComponent</h2>
-    </section>
+  <section class="slide">
+    <h2>Концепции:</h2>
+    <p><strong>Props </strong> —  это аргументы вызова компонента. Они передаются как атрибуты в JSX. </p>
+    <pre>
+      <code>&lt;MyComponent props1={smth} props2="asdf"/&gt;</code>
+      <code>...</code>
+      <code>this.props.props1</code>
+    </pre>
+  </section>
 
-    <section class="slide">
-        <h2>Вместо:</h2>
-        <pre>
-          <code>class MyComponent extends React.Component { ... }</code>
-        </pre>
+  <section class="slide">
+    <h2>Class:</h2>
+    <pre>
+      <code>class MyComponent extends React.Component { ... }</code>
+      <code>render(JSX)</code>
+    </pre>
+    <h2>Function:</h2>
+    <pre>
+      <code>const MyComponent = (props) => { ... }</code>
+      <code>return JSX;</code>
+    </pre>
+  </section>
 
-        <h2>Использовать:</h2>
-        <pre>
-          <code>class MyComponent extends React.PureComponent { ... }</code>
-        </pre>
-    </section>
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/reactLifecycle.jpeg" alt="react lifecycle">
+    </figure>
+  </section>
 
-    <section class="slide">
-        <h2>Сложные типы:</h2>
-        <pre>
-          <code>class MyComponent extends React.PureComponent {</code>
-          <code>...</code>
-          <code>}</code>
-          
-          <code>const someProp = { field1: value; }</code>
-          <code>&lt;MyComponent someProp={ someProp }/&gt;</code>
-        </pre>
-    </section>
+  <section class="slide">
+    <ul>
+      <li>
+        <a href="https://reactjs.org/redirect-to-codepen/components-and-props/composing-components">Функциональный компонент</a>
+      </li>
+      <li>
+        <a href="http://codepen.io/gaearon/pen/amqdNA?editors=0010">Class'ный компонент</a>
+      </li>
+    </ul>
+  </section>
+  
+  <section class="slide" id="cover-redux">
+    <h2>Redux</h2>
+    <figure>
+      <img class="cover" width="450px" src="pictures/Redux-icon.png" alt="Redux icon">
+    </figure>
+    <style>
+      #cover-redux {
+        background-color: black;
+      }
 
-    <div class="progress"></div>
+      #cover-redux h2 {
+        color: white;
+        font-size: 70px;
+      }
 
-    <script src="node_modules/shower-core/shower.min.js"></script>
-    <!-- Copyright © 2018 Yours Truly, Famous Inc. -->
+      #cover-redux p {
+        margin: 10px 0 0;
+        color: white;
+        font-style: italic;
+        font-size: 20px;
+      }
+
+      #cover-redux p a {
+        color: white;
+      }
+    </style>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Это экосистема</h2>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Один источник данных</h2>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">State — readonly!</h2>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Изменения — в чистых функциях</h2>
+  </section>
+
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/reduxFlow.png" alt="redux flow">
+    </figure>
+  </section>
+
+  <section class="slide">
+    <h2>Объявляем возможные actions:</h2>
+    <pre>
+      <code>const addValue = (value) => ({</code>
+      <code>  type: 'ADD_VALUE',</code>
+      <code>  payload: value</code>
+      <code>});</code>
+    </pre>
+  </section>
+
+  <section class="slide reducer-slide-1">
+    <h2>Создаём обработчик (reducer):</h2>
+    <pre>
+      <code>const someReducer = (state, action) => {</code>
+      <code>  switch (action.type) {</code>
+      <code>    case 'ADD_VALUE':</code>
+      <code>      return { </code>
+      <code>        ...state,</code>
+      <code>        value: state.value + action.payload</code>
+      <code>      }</code>
+      <code>  }</code>
+      <code>};</code>
+    </pre>
+    <style>
+      .reducer-slide-1 code {
+        font-size: 20px;
+      }
+    </style>
+  </section>
+  
+  <section class="slide reducer-slide-2">
+    <h2>Создаём обработчик (reducer):</h2>
+    <pre>
+      <code>const defaultState = {</code>
+      <code>  value: 0</code>
+      <code>};</code>
+      <code>const someReducer = (state = defaultState, action) => {</code>
+      <code>  ...</code>
+      <code>  default: return state;</code>
+      <code>}</code>
+    </pre>
+    <style>
+      .reducer-slide-2 code {
+        font-size: 20px;
+      }
+    </style>
+  </section>
+
+  <section class="slide">
+    <h2>combineReducers:</h2>
+    <pre>
+      <code>import { combineReducers } from 'redux';</code>
+      <code>export default combineReducers({</code>
+      <code>  reducer1,</code>
+      <code>  reducer2</code>
+      <code>});</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/store.PNG" alt="redux flow">
+    </figure>
+  </section>
+  
+  <section class="slide">
+    <h2>Объявляем store:</h2>
+    <pre>
+      <code>import { createStore } from 'redux';</code>
+      <code>export default createStore(rootReducer, initialState);</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Связываем store с приложением:</h2>
+    <pre>
+      <code>import { Provider } from 'react-redux';</code>
+      <code>&lt;Provider store={store}&gt;</code>
+      <code>  &lt;App/&gt;</code>
+      <code>&lt;/Provider&gt;</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Подключаем компонент к redux:</h2>
+    <pre>
+      <code>import {connect} from 'react-redux';</code>
+      <code>...</code>
+      <code>class MyComponent extends React.Component { ... };</code>
+      <code>...</code>
+      <code>connect(mapStateToProps, mapDispatchToProps)(MyComponent);</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>mapStateToProps:</h2>
+    <pre>
+      <code>const mapStateToProps = (state) => ({</code>
+      <code>  props1: state.reducer1.value1</code>
+      <code>  props2: state.reducer1.value2</code>
+      <code>  props3: state.reducer2.value1</code>
+      <code>});</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>mapDispatchToProps:</h2>
+    <pre>
+      <code>const mapDispatchToProps = (dispatch) => ({</code>
+      <code>  doSmth1: dispatch({type: DANCE}),</code>
+      <code>  doSmth2: dispatch(addValue())</code>
+      <code>});</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>mapDispatchToProps:</h2>
+    <pre>
+      <code>const value = this.props.props1;</code>
+      <code>this.props.doSmth2();</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/reduxflow2.jpg" alt="redux flow">
+    </figure>
+  </section>
+
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/allFine.jpg" alt="redux flow">
+    </figure>
+  </section>
+
+  <section class="slide" id="cover-perf">
+    <h2>React performance</h2>
+    <figure>
+      <img class="cover" src="pictures/cover.jpg" alt="Hands on the orange typewriter in a park">
+    </figure>
+    <style>
+      #cover-perf h2 {
+        color: white;
+        font-size: 70px;
+      }
+
+      #cover-perf p {
+        margin: 10px 0 0;
+        color: white;
+        font-style: italic;
+        font-size: 20px;
+      }
+
+      #cover-perf p a {
+        color: white;
+      }
+    </style>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Virtual DOM</h2>
+  </section>
+
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/virtual-dom-update.png" alt="How virtual DOM works">
+      <figcaption class="copyright right white">
+        <a href="https://www.naukri.com/">© Naukri Engineering</a>
+      </figcaption>
+    </figure>
+    <style>
+      .copyright a {
+        color: black;
+      }
+    </style>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">render()</h2>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">shouldComponentUpdate()</h2>
+  </section>
+
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/rerender.png" alt="How react do rerender">
+    </figure>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">shouldComponentUpdate ?</h2>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout">Yes!</h2>
+  </section>
+
+  <section class="slide">
+    <h2>По умолчанию React делает так:</h2>
+    <pre>
+      <code>shouldComponentUpdate(nextProps, nextState) {</code>
+      <code>  return <mark>true</mark>;</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Переопределить SCU</h2>
+  </section>
+
+  <section class="slide">
+    <pre>
+      <code>shouldComponentUpdate(nextProps, nextState){</code>
+      <code>  if (this.props.prop1 !== nextProps.prop1) {</code>
+      <code>    return <mark>true</mark>;</code>
+      <code>  }</code>
+      <code>  if (this.state.state1 !== nextState.state1) {</code>
+      <code>    return <mark>true</mark>;</code>
+      <code>  }</code>
+      <code>  return <mark>false</mark>;</code>
+      <code>}</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">PureComponent</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Вместо:</h2>
+    <pre>
+      <code>class MyComponent extends React.Component { ... }</code>
+    </pre>
+
+    <h2>Использовать:</h2>
+    <pre>
+      <code>class MyComponent extends React.PureComponent { ... }</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Минусы PureComponent</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Поверхностное (неглубокое) сравнение</h2>
+    <pre>
+      <code>if (this.props.item !== newProps.item) { ... }</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Сложные типы:</h2>
+    <pre>
+      <code>class MyComponent extends React.PureComponent { ... }</code>
+      <code>...</code>
+      <code>const someProp = { field1: value }; </code>
+      <code>&lt;MyComponent someProp={ someProp }/&gt;</code>
+      <code>...</code>
+      <code>someProp.field1 = newValue;</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Проверка ВСЕХ свойств!</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Уход от функциональных компонент:</h2>
+    <ol>
+      <li>Доступ к жизненному циклу</li>
+      <li>Добавление строк кода</li>
+      <li>Человеческий фактор</li>
+    </ol>
+  </section>
+
+  <section class="slide">
+    <h2 style="font-size: 110px;">HOC</h2>
+    <img class="place right bottom" src="pictures/HOC.jpg" alt="картинка носа">
+  </section>
+
+  <section class="slide">
+    <h2 style="font-size: 110px;">HOC</h2>
+    <h2>Higher-Order Components</h2>
+    <img class="place right bottom" src="pictures/notHOC.jpg" alt="картинка перечёркнутого носа">
+  </section>
+  
+  <section class="slide">
+    <h2>Проблемные места</h2>
+    <ul>
+      <li>Неглубокое сравнение</li>
+      <li>Проверка всех свойств</li>
+      <li>Уход от функциональных компонент</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Recompose</h2>
+  </section>
+
+  <section class="slide">
+    <h2>pure()</h2>
+    <pre>
+      <code>import pure from 'recompose/pure';</code>
+      <code>...</code>
+      <code>const MyComponent = ({ prop1, prop2, prop3 }) => ( ... ) </code>
+      <code>...</code>
+      <code>export default pure(MyComponent);</code>
+    </pre>
+  </section>
+
+  <section class="slide should-update-slide">
+    <h2>shouldUpdate()</h2>
+    <pre class="lot-code">
+      <code>import pure from 'recompose/pure';</code>
+      <code>...</code>
+      <code>const MyComponent = ({ prop1, prop2, prop3 }) => ( ... ); </code>
+      <code>...</code>
+      <code>const checkPropsChange = (props, nextProps) =></code>
+      <code> (nextProps.prop1 !== props.prop1);</code>
+      <code>...</code>
+      <code>export default shouldUpdate(checkPropsChange)(MyComponent);</code>
+    </pre>
+    <style>
+      .should-update-slide code {
+        font-size: 20px;
+      }
+    </style>
+  </section>
+
+  <section class="slide">
+    <h2>onlyUpdateForKeys()</h2>
+    <pre class="lot-code">
+      <code>import pure from 'recompose/pure';</code>
+      <code>...</code>
+      <code>const MyComponent = ({ prop1, prop2, prop3 }) => ( ... ); </code>
+      <code>...</code>
+      <code>export default onlyUpdateForKeys(['prop1'])(MyComponent);</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Проблемные места</h2>
+    <ul>
+      <li>Неглубокое сравнение</li>
+      <li><del>Проверка всех свойств</del></li>
+      <li><del>Уход от функциональных компонент</del></li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2 style="font-size: 120px">Не мутировать!</h2>
+    <figure>
+      <img class="cover" src="pictures/tmnt.jpg" alt="tmnt">
+    </figure>
+  </section>
+
+  <section class="slide">
+    <h2>Сложные типы:</h2>
+    <pre>
+      <code>class MyComponent extends React.PureComponent { ... }</code>
+      <code>...</code>
+      <code>const someProp = { field1: value }; </code>
+      <code>&lt;MyComponent someProp={ someProp }/&gt;</code>
+      <code>...</code>
+      <code><mark>someProp.field1 = newValue;</mark></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Иммутабельность:</h2>
+    <pre>
+      <code>class MyComponent extends React.PureComponent { ... }</code>
+      <code>...</code>
+      <code>let someProp = { field1: value }; </code>
+      <code>&lt;MyComponent someProp={ someProp }/&gt;</code>
+      <code>...</code>
+      <code><mark>someProp = Object.assign({}, someProp, {field1: newValue});</mark></code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Redux</h2>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">connect() - уже pure</h2>
+  </section>
+
+  <section class="slide">
+    <h2>Иммутабельность State:</h2>
+    <pre>
+      <code>const mapStateToProps = (state) => ({</code>
+        <code>  prop1: state.reducer1.prop1,</code>
+        <code>  prop2: state.reducer1.prop2</code>
+      <code>});</code>
+      <code>...</code>
+      <code>export default connect(mapStateToProps)(MyComponent); </code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Иммутабельность State:</h2>
+    <pre>
+      <code>case types.DO_SMTH: </code>
+      <code>  return {</code>
+      <code>    ...previousState,</code>
+      <code>    prop1: newValue</code>
+      <code>  };</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Что возвращает mapStateToProps?</h2>
+    <pre>
+      <code>const mapStateToProps = (state) => ({</code>
+      <code>  prop1: state.reducer1.prop1,</code>
+      <code>  prop2: state.reducer1.prop2</code>
+      <code>});</code>
+      <code>...</code>
+      <code>export default connect(mapStateToProps)(MyComponent); </code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Объект!</h2>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Reselect</h2>
+  </section>
+
+  <section class="slide">
+    <h2>createSelector</h2>
+    <pre>
+      <code>import { createSelector } from 'reselect';</code>
+      <code>...</code>
+      <code>const rootSelector = state => state.benefits;</code>
+      <code>...</code>
+      <code>export const mySelector = createSelector(</code>
+      <code>  rootSelector,</code>
+      <code>  benefits => benefits.places.list,</code>
+      <code>);</code>
+    </pre>
+  </section>
+  
+  <section class="slide">
+    <h2>createSelector</h2>
+    <pre>
+      <code>import { mySelector } from '../redux/selectors/mySelector';</code>
+      <code>...</code>
+      <code>const mapStateToProps = state => ({</code>
+      <code>  results: searchResultsSelector(state),</code>
+      <code>);</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Сколько ошибок?</h2>
+    <pre>
+      <code>&lt;MyComponent1 style={{ color: red }}&gt;</code>
+      <code>  &lt;MyComponent2 list={[1, 2, 3]}&gt;</code>
+      <code>    &lt;MyComponent3 onClick={e => this.doSmth(e)}&gt;</code>
+      <code>  &lt;MyComponent2/&gt;</code>
+      <code>&lt;MyComponent1/&gt;</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2>Ответ</h2>
+    <pre>
+      <code>&lt;MyComponent1 style={<mark>{ color: red }</mark>}&gt;</code>
+      <code>  &lt;MyComponent2 list={<mark>[1, 2, 3]</mark>}&gt;</code>
+      <code>    &lt;MyComponent3 onClick={<mark>e => this.doSmth(e)</mark>}&gt;</code>
+      <code>  &lt;MyComponent2/&gt;</code>
+      <code>&lt;MyComponent1/&gt;</code>
+    </pre>
+  </section>
+  
+  <section class="slide">
+    <h2>Не используйте литералы!</h2>
+    <pre>
+      <code>const styles = { color: red };</code>
+      <code>...</code>
+      <code>&lt;MyComponent1 style={ styles }/&gt;</code>
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px">Как посмотреть?</h2>
+  </section>
+
+  <section class="slide">
+    <ul>
+      <li>http://localhost:3000/?react_perf</li>
+      <li>Chrome devTools</li>
+      <li>Запись</li>
+      <li>Действие</li>
+      <li>Закончить запись</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <figure>
+      <img class="cover" src="pictures/devTools.png" alt="Screenshot of devtools">
+    </figure>
+  </section>
+
+  <section class="slide">
+    <h2 class="shout" style="font-size: 100px; color: white;">Ссылка на ссылки</h2>
+    <figure>
+      <img class="cover" src="pictures/stalin.jpg" alt="stalin">
+    </figure>
+  </section>
+  
+  <div class="progress"></div>
+
+  <script src="node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2018 Yours Truly, Famous Inc. -->
 
 </body>
+
 </html>
